@@ -2,8 +2,8 @@
 
 # Generate password hashes without knowing the users' passwords.
 
-# Tested with Python 3.4.0, 2.7.6, 2.6.6 on Ubuntu 14.04, Centos 6.5 and
-# Mac OS X 10.10
+# Tested with Python 3.4.2, 3.4.0, 2.7.9, 2.7.6, 2.6.6 on Debian 8, Ubuntu
+# 14.04, Mac OS X 10.10, CentOS 6.6, CentOS 6.5
 
 # http://unix.stackexchange.com/questions/44883/encrypt-a-password-the-same-way-mysql-does
 # http://stackoverflow.com/questions/13052047/python-crypt-in-osx
@@ -38,7 +38,7 @@ ALPHABET = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ./'
 
 
 def mysql_hash(plaintext):
-    hashed = sha1(sha1(plaintext).digest()).hexdigest().upper()
+    hashed = sha1(sha1(plaintext.encode('utf-8')).digest()).hexdigest().upper()
     return '*{0}'.format(hashed)
 
 
