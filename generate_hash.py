@@ -25,9 +25,10 @@
 
 import getpass
 from hashlib import sha1
-# pip install passlib
 import random
+# pip install passlib
 from passlib.hash import sha512_crypt
+
 
 ALPHABET = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
