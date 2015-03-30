@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 if [ ! -d venv ]; then
-    exit
+    echo 'Missing venv, please run setup'
+    exit 1
 fi
 
 source venv/bin/activate
