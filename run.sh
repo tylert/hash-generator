@@ -5,4 +5,4 @@ if [ ! -d venv ]; then
 fi
 
 source venv/bin/activate
-python generate_hashes.py
+python ${@} generate_hashes.py
