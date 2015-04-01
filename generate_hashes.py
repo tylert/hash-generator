@@ -52,6 +52,9 @@ if __name__ == '__main__':
 # http://stackoverflow.com/questions/13052047/python-crypt-in-osx
 # http://stackoverflow.com/questions/5293959/creating-a-salt-in-python
 
+# mysql_config_editor set --login-path=foo --host=host --user=user --password
+# mysql --login-path=foo
+
 # Assuming the plaintext passphrase 'hello' for john.smith...
 
 # USE mysql;
@@ -61,6 +64,7 @@ if __name__ == '__main__':
 
 # ... or, if updating an existing user's password hash directly...
 
+# USE mysql;
 # SET PASSWORD FOR 'john.smith'@'%' = '*6B4F89A54E2D27ECD7E8DA05B4AB8FD9D1D8B119';
 
 # >>> mysql_hash(secret='hello')
