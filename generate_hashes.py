@@ -5,7 +5,7 @@ import getpass
 from hashlib import sha1
 import random
 # pip install passlib
-from passlib.hash import (apr_md5_crypt, sha512_crypt)
+from passlib.hash import apr_md5_crypt, sha512_crypt
 
 
 # Base64 alphabet
@@ -20,6 +20,7 @@ def mysql_hash(secret):
 
 def htaccess_hash(secret, salt=None):
     '''Generate htaccess/htpasswd password hash'''
+    # Sending it None for a salt will cause it to generate one.
     hashed = apr_md5_crypt.encrypt(secret=secret, salt=salt)
     return '{0}'.format(hashed)
 
