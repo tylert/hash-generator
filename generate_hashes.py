@@ -31,7 +31,7 @@ def linux_hash(secret, salt=None):
         salt = ''.join(random.choice(ALPHABET) for i in range(8))
 
     hashed = sha512_crypt.encrypt(secret=secret, salt=salt,
-        rounds=5000, implicit_rounds=True)
+                                  rounds=5000, implicit_rounds=True)
     return '{0}'.format(hashed)
 
 
@@ -66,7 +66,8 @@ if __name__ == '__main__':
 # ... or, if updating an existing user's password hash directly...
 
 # USE mysql;
-# SET PASSWORD FOR 'john.smith'@'%' = '*6B4F89A54E2D27ECD7E8DA05B4AB8FD9D1D8B119';
+# SET PASSWORD FOR 'john.smith'@'%' =
+# '*6B4F89A54E2D27ECD7E8DA05B4AB8FD9D1D8B119';
 
 # >>> mysql_hash(secret='hello')
 # *6B4F89A54E2D27ECD7E8DA05B4AB8FD9D1D8B119
