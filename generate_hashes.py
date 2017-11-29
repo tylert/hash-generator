@@ -4,6 +4,7 @@
 import getpass
 from hashlib import sha1
 import random
+
 # pip install passlib
 from passlib.hash import apr_md5_crypt, sha512_crypt
 
@@ -31,7 +32,7 @@ def linux_hash(secret, salt=None):
         salt = ''.join(random.choice(ALPHABET) for i in range(8))
 
     hashed = sha512_crypt.encrypt(secret=secret, salt=salt,
-                                  rounds=5000, implicit_rounds=True)
+                                  rounds=5000)
     return '{0}'.format(hashed)
 
 
@@ -46,6 +47,7 @@ if __name__ == '__main__':
 
 # Generate password hashes without knowing the users' passwords.
 
+# Tested with Python 3.6.3, 2.7.14, 2.7.10 on macOS 10.12
 # Tested with Python 3.4.2, 3.4.0, 2.7.9, 2.7.6, 2.6.6 on Debian 8, Ubuntu
 # 14.04, Mac OS X 10.10, CentOS 6.6, CentOS 6.5
 
@@ -59,7 +61,8 @@ if __name__ == '__main__':
 # Assuming the plaintext passphrase 'hello' for john.smith...
 
 # USE mysql;
-# CREATE USER 'john.smith'@'%' IDENTIFIED BY PASSWORD '*6B4F89A54E2D27ECD7E8DA05B4AB8FD9D1D8B119';
+# CREATE USER 'john.smith'@'%' IDENTIFIED BY PASSWORD \
+#   '*6B4F89A54E2D27ECD7E8DA05B4AB8FD9D1D8B119';
 # GRANT SELECT,INSERT,UPDATE,DELETE ON *.* TO 'john.smith'@'%';
 # FLUSH PRIVILEGES;
 
