@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 
 import getpass
@@ -14,42 +14,50 @@ ALPHABET = './0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 
 
 def mysql_hash(secret):
-    '''Generate MySQL password hash'''
+    '''Generate MySQL password hash.'''
+
     hashed = sha1(sha1(secret.encode('utf-8')).digest()).hexdigest().upper()
-    return '*{0}'.format(hashed)
+    return '*{}'.format(hashed)
 
 
 def htaccess_hash(secret, salt=None):
-    '''Generate htaccess/htpasswd password hash'''
+    '''Generate htaccess/htpasswd password hash.'''
+
     # Sending it None for a salt will cause it to generate one.
     hashed = apr_md5_crypt.encrypt(secret=secret, salt=salt)
-    return '{0}'.format(hashed)
+    return '{}'.format(hashed)
 
 
 def linux_hash(secret, salt=None):
-    '''Generate Linux password hash'''
+    '''Generate Linux password hash.'''
+
     if salt is None:
-        salt = ''.join(random.choice(ALPHABET) for i in range(8))
+        salt = ''.join(random.choice(ALPHABET) for i in range(16))
 
     hashed = sha512_crypt.encrypt(secret=secret, salt=salt,
                                   rounds=5000)
-    return '{0}'.format(hashed)
+    return '{}'.format(hashed)
 
 
-if __name__ == '__main__':
+def main():
+    '''Main function.'''
 
     secret = getpass.getpass('Please enter your desired password: ')
 
-    print('mysql {0}'.format(mysql_hash(secret)))
-    print('htaccess {0}'.format(htaccess_hash(secret)))
-    print('linux {0}'.format(linux_hash(secret)))
+    print('mysql {}'.format(mysql_hash(secret)))
+    print('htaccess {}'.format(htaccess_hash(secret)))
+    print('linux {}'.format(linux_hash(secret)))
+
+
+if __name__ == '__main__':
+    main()
 
 
 # Generate password hashes without knowing the users' passwords.
 
 # Tested with Python 3.6.3, 2.7.14, 2.7.10 on macOS 10.12
-# Tested with Python 3.4.2, 3.4.0, 2.7.9, 2.7.6, 2.6.6 on Debian 8, Ubuntu
-# 14.04, Mac OS X 10.10, CentOS 6.6, CentOS 6.5
+# Tested with Python 3.5.3, 3.4.2, 3.4.0, 2.7.9, 2.7.6, 2.6.6 on Debian 9.x,
+# Debian 8.x, Ubuntu 14.04, Mac OS X 10.10, CentOS 6.6, CentOS 6.5
 
 # http://unix.stackexchange.com/questions/44883/encrypt-a-password-the-same-way-mysql-does
 # http://stackoverflow.com/questions/13052047/python-crypt-in-osx
