@@ -1,11 +1,9 @@
-#!/usr/bin/env python3
-
+#!/usr/bin/env python
 
 import getpass
 from hashlib import sha1
 import random
 
-# pip install passlib
 from passlib.hash import apr_md5_crypt, sha512_crypt
 
 
