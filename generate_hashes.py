@@ -14,27 +14,23 @@ ALPHABET = './0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 def mysql_hash(secret):
     '''Generate MySQL password hash'''
 
-    hashed = sha1(sha1(secret.encode('utf-8')).digest()).hexdigest().upper()
-    return '*{}'.format(hashed)
+    return f'*{sha1(sha1(secret.encode("utf-8")).digest()).hexdigest().upper()}'
 
 
 def htaccess_hash(secret, salt=None):
     '''Generate htaccess/htpasswd password hash'''
 
     # Sending it None for a salt will cause it to generate one.
-    hashed = apr_md5_crypt.hash(secret=secret, salt=salt)
-    return '{}'.format(hashed)
+    return f'{apr_md5_crypt.hash(secret=secret, salt=salt)}'
 
 
-def linux_hash(secret, salt=None):
-    '''Generate Linux password hash'''
+def linux_hash(secret, salt=None, rounds=5000):
+    '''Generate Linux PAM password hash'''
 
     if salt is None:
         salt = ''.join(choice(ALPHABET) for i in range(16))
 
-    hashed = sha512_crypt.hash(secret=secret, salt=salt,
-                                  rounds=5000)
-    return '{}'.format(hashed)
+    return f'{sha512_crypt.hash(secret=secret, salt=salt, rounds=rounds)}'
 
 
 def main():
@@ -42,9 +38,9 @@ def main():
 
     secret = getpass('Please enter your desired password: ')
 
-    print('mysql {}'.format(mysql_hash(secret)))
-    print('htaccess {}'.format(htaccess_hash(secret)))
-    print('linux {}'.format(linux_hash(secret)))
+    print(f'mysql {mysql_hash(secret)}')
+    print(f'htaccess {htaccess_hash(secret)}')
+    print(f'linux {linux_hash(secret)}')
 
 
 if __name__ == '__main__':
