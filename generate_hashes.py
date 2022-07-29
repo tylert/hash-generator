@@ -38,9 +38,9 @@ def main():
 
     secret = getpass('Please enter your desired password: ')
 
-    print(f'mysql {mysql_hash(secret)}')
     print(f'htaccess {htaccess_hash(secret)}')
     print(f'linux {linux_hash(secret)}')
+    print(f'mysql {mysql_hash(secret)}')
 
 
 if __name__ == '__main__':
