@@ -49,6 +49,7 @@ if __name__ == '__main__':
 
 # Generate password hashes without knowing the users' passwords.
 
+# https://en.wikipedia.org/wiki/Bcrypt
 # http://unix.stackexchange.com/questions/44883/encrypt-a-password-the-same-way-mysql-does
 # http://stackoverflow.com/questions/13052047/python-crypt-in-osx
 # http://stackoverflow.com/questions/5293959/creating-a-salt-in-python
